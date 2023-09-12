@@ -1,5 +1,6 @@
 package tests;
 
+import models.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -9,10 +10,11 @@ public class RegistrationTests extends TestBase{
     public void registrationPositiveTest() {
         // open login form
         int i = (int) ((System.currentTimeMillis()/1000)%3600);
+        User user = new User("kuku" + i + "@mail.ru", "Qw12345$");
         app.getHelperUser().openLoginRegistrationForm();
 //        wd.findElement(By.xpath("//*[.='LOGIN']")).click();
         // fill login form
-        app.getHelperUser().fillLoginRegistrationForm("kuku" + i + "@mail.ru", "Qw12345$");
+        app.getHelperUser().fillLoginRegistrationForm(user);
         //1 emailInput
 //        WebElement emailInput = wd.findElement(By.xpath("//input[1]"));
 //        emailInput.click();

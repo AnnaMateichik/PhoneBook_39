@@ -13,7 +13,7 @@ public class TestBase {
 //        wd.navigate().to("https://telranedu.web.app/home");
 //        wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 //    }
-    public void setup() {
+    public void setUp() {
         app.init();
     }
     @AfterSuite
