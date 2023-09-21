@@ -1,5 +1,7 @@
 package tests;
 
+import models.Contact;
+import models.User;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -26,6 +28,20 @@ public class LoginTests extends TestBase{
         app.getHelperUser().fillLoginRegistrationForm("kuku11@mail.ru", "Qw12345$");
         // click on button login
 //        wd.findElement(By.xpath("//button[1]")).click();
+        app.getHelperUser().submitLogin();
+        // assert
+        app.getHelperUser().pause(3000);
+        Assert.assertTrue(app.getHelperUser().isElementPresent(By.xpath("//*[.='Sign Out']")));
+    }
+    @Test
+    public void loginPositiveTestModel() {
+
+        User user = new User().withEmail("kuku11@mail.ru").withPassword("Qw12345$");
+        // open login form
+        app.getHelperUser().openLoginRegistrationForm();
+        // fill login form
+        app.getHelperUser().fillLoginRegistrationForm(user.getEmail(), user.getPassword());
+        // click on button login
         app.getHelperUser().submitLogin();
         // assert
         app.getHelperUser().pause(3000);

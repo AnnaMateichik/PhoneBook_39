@@ -10,7 +10,10 @@ public class RegistrationTests extends TestBase{
     public void registrationPositiveTest() {
         // open login form
         int i = (int) ((System.currentTimeMillis()/1000)%3600);
-        User user = new User("kuku" + i + "@mail.ru", "Qw12345$");
+        String email = "kuku" + i + "@mail.ru";
+        String password = "Qw12345$";
+        //User user = new User("kuku" + i + "@mail.ru", "Qw12345$");
+        User user = new User(email, password);
         app.getHelperUser().openLoginRegistrationForm();
 //        wd.findElement(By.xpath("//*[.='LOGIN']")).click();
         // fill login form
@@ -28,6 +31,7 @@ public class RegistrationTests extends TestBase{
         // click on button registration
         app.getHelperUser().submitRegistration();
 //        wd.findElement(By.xpath("//button[2]")).click();
+        logger.info("registrationPositiveTest starts with:" + email + " & " + password);
         // assert
         app.getHelperUser().pause(3000);
         Assert.assertTrue(app.getHelperUser().isLogged());
