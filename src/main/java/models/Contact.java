@@ -11,7 +11,11 @@ import lombok.ToString;
 @Builder
 
 public class Contact {
+    String name;
+    String lastName;
+    String phone;
     String email;
-    String password;
+    String address;
+    String description;
 
 }

@@ -1,12 +1,22 @@
 package tests;
 
+import manager.NGListener;
 import models.Contact;
 import models.User;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+@Listeners(NGListener.class)
 
 public class LoginTests extends TestBase{
+    @BeforeMethod
+    public void precondition() {
+        if (app.getHelperUser().isLogged()) {
+            app.getHelperUser().logout();
+        }
+    }
 
     @Test
     public void loginPositiveTest() {
@@ -44,7 +54,7 @@ public class LoginTests extends TestBase{
         // click on button login
         app.getHelperUser().submitLogin();
         // assert
-        app.getHelperUser().pause(3000);
+        app.getHelperUser().pause(5000);
         Assert.assertTrue(app.getHelperUser().isElementPresent(By.xpath("//*[.='Sign Out']")));
     }
     @Test

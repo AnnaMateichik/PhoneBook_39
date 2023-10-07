@@ -32,6 +32,12 @@ public class HelperUser extends HelperBase{
         type(By.xpath("//input[1]"), user.getEmail());
         type(By.xpath("//input[2]"), user.getPassword());
     }
+
+    public void login (User user) {
+        openLoginRegistrationForm();
+        fillLoginRegistrationForm(user);
+        submitLogin();
+    }
     public void submitLogin() {
         wd.findElement(By.xpath("//button[1]")).click();
     }
