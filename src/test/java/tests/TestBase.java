@@ -18,18 +18,18 @@ public class TestBase {
     );
     Logger logger = LoggerFactory.getLogger(TestBase.class);
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void startTest(Method method) {
         logger.info("Started test ---> " + method.getName());
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void stopTest(Method method) {
         logger.info("Finished test ---> " + method.getName());
         logger.info("========================================");
     }
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun = true)
 //    public void init() {
 //        wd = new ChromeDriver();
 //        wd.navigate().to("https://telranedu.web.app/home");
@@ -38,7 +38,7 @@ public class TestBase {
     public void setUp() {
         app.init();
     }
-    @AfterSuite
+    @AfterSuite(alwaysRun = true)
 //    public void tearDown() {
 //        pause(3000);
 //        wd.quit();

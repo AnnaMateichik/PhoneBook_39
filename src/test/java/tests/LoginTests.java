@@ -1,6 +1,7 @@
 package tests;
 
 import manager.NGListener;
+import manager.ProviderData;
 import models.Contact;
 import models.User;
 import org.openqa.selenium.By;
@@ -11,14 +12,14 @@ import org.testng.annotations.Test;
 @Listeners(NGListener.class)
 
 public class LoginTests extends TestBase{
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void precondition() {
         if (app.getHelperUser().isLogged()) {
             app.getHelperUser().logout();
         }
     }
 
-    @Test
+    @Test(groups = {"positive", "smoke"})
     public void loginPositiveTest() {
         // open login form
         //wd.findElement(By.xpath("//*[.='LOGIN']")).click();
@@ -43,7 +44,7 @@ public class LoginTests extends TestBase{
         app.getHelperUser().pause(3000);
         Assert.assertTrue(app.getHelperUser().isElementPresent(By.xpath("//*[.='Sign Out']")));
     }
-    @Test
+    @Test(groups = {"positive"})
     public void loginPositiveTestModel() {
 
         User user = new User().withEmail("kuku11@mail.ru").withPassword("Qw12345$");
@@ -57,7 +58,21 @@ public class LoginTests extends TestBase{
         app.getHelperUser().pause(5000);
         Assert.assertTrue(app.getHelperUser().isElementPresent(By.xpath("//*[.='Sign Out']")));
     }
-    @Test
+
+    @Test(groups = {"positive"}, dataProvider = "userDTO", dataProviderClass = ProviderData.class)
+    public void loginPositiveUserDTO(User user) {
+        // open login form
+        app.getHelperUser().openLoginRegistrationForm();
+        // fill login form
+        app.getHelperUser().fillLoginRegistrationForm(user.getEmail(), user.getPassword());
+        // click on button login
+        app.getHelperUser().submitLogin();
+        // assert
+        app.getHelperUser().pause(5000);
+        Assert.assertTrue(app.getHelperUser().isElementPresent(By.xpath("//*[.='Sign Out']")));
+    }
+
+    @Test(groups = {"negative"})
     public void loginNegativeTestWrongEmailWithoutStrudel(){
         // open login form
         app.getHelperUser().openLoginRegistrationForm();
@@ -70,7 +85,7 @@ public class LoginTests extends TestBase{
         Assert.assertTrue(app.getHelperUser().isAlertPresent());
     }
     //Task 2
-    @Test
+    @Test(groups = {"negative"})
     public void loginNegativeTestWrongPasswordSpaces(){
         // open login form
         app.getHelperUser().openLoginRegistrationForm();
