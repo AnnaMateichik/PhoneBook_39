@@ -9,18 +9,22 @@ import org.slf4j.LoggerFactory;
 
 public class WDListener extends AbstractWebDriverEventListener {
 
-    Logger logger= LoggerFactory.getLogger(WDListener.class);
+    Logger logger = LoggerFactory.getLogger(WDListener.class);
+
+    public WDListener() {
+        super();
+    }
 
     @Override
     public void beforeFindBy(By by, WebElement element, WebDriver driver) {
         super.beforeFindBy(by, element, driver);
-        logger.info("Start searching element by locator --> " + by);
+        logger.info("Start searching element by locator --->" + by);
     }
 
     @Override
     public void afterFindBy(By by, WebElement element, WebDriver driver) {
         super.afterFindBy(by, element, driver);
-        logger.info("Element with locator --> " + by + " is found");
+        logger.info("Element with locator locator --->" + by + " is found");
     }
 
     @Override
@@ -29,14 +33,14 @@ public class WDListener extends AbstractWebDriverEventListener {
         logger.info("Something went wrong!!!");
         logger.info(throwable.getMessage());
         logger.info(throwable.fillInStackTrace().toString());
-        int i = (int) ((System.currentTimeMillis()/1000)%3600);
-        String link = "src/test/screenshots/screenshort-" + i + ".png";
+
+        int i = (int)(System.currentTimeMillis()/1000%3600);
+        String link = "src/test/screenshots/screenshot-" + i + ".png";
+
         HelperBase helperBase = new HelperBase(driver);
         helperBase.takeScreenShot(link);
-        logger.info("Here is the path to the screenshot with error --> " + link);
+        logger.info("Here is the pass to screenshot with error ---> "+ link);
     }
 
-    public WDListener() {
-        super();
-    }
+
 }

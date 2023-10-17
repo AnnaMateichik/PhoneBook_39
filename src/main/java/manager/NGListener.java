@@ -13,19 +13,19 @@ public class NGListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult result) {
         ITestListener.super.onTestStart(result);
-        logger.info("Start of the test --> " + result.getName());
+        logger.info("Start of the test ---> " + result.getName());
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
         ITestListener.super.onTestSuccess(result);
-        logger.info("Success test --> " + result.getName());
+        logger.info("Success test ---> " + result.getName());
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
         ITestListener.super.onTestFailure(result);
-        logger.info("Failure test --> " + result.getThrowable().fillInStackTrace());
+        logger.info("Failure  test ---> " + result.getThrowable().fillInStackTrace());
     }
 
     @Override

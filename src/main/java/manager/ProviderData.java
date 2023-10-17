@@ -10,54 +10,65 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ProviderData {
-
     @DataProvider
-    public Iterator<Object[]> userDTO() {
-        List<Object[]> list = new ArrayList<>();
-        list.add(new Object[] {
-                new User("kuku11@mail.ru", "Qw12345$")
-        });
-        list.add(new Object[] {
-                new User("kuku12@mail.ru", "Qw12345$")
-        });
-        return list.iterator();
-    }
-
-    @DataProvider
-    public Iterator<Object[]> contactDTO() {
-        List<Object[]> list = new ArrayList<>();
-        list.add(new Object[] {
-                Contact.builder()
-                        .name("David")
-                        .lastName("Or")
-                        .phone("0584456585")
-                        .email("david@gmail.com")
-                        .address("Lod")
-                        .description("My friend")
+    public Iterator<Object[]> userDTO(){ //Data Transfer Object = DTO
+        List<Object[]> list = new ArrayList<>(); //train
+        list.add(new Object[]{
+                User.builder()
+                        .email("anna@mail.com")
+                        .password("Qq12345$")
                         .build()
         });
-        list.add(new Object[] {
-                Contact.builder()
-                        .name("Hana")
-                        .lastName("Nir")
-                        .phone("0535656969")
-                        .email("hana@gmail.com")
-                        .address("Haifa")
-                        .description("My sister")
+        list.add(new Object[]{
+                User.builder()
+                        .email("lera@mail.com")
+                        .password("Ee12345$")
                         .build()
         });
-        return list.iterator();
+        list.add(new Object[]{
+                User.builder()
+                        .email("rita@mail.com")
+                        .password("Rr12345$")
+                        .build()
+        });
+        return list.iterator();  //man in the train "list"
     }
-
+    @DataProvider
+    public Iterator<Object[]> contactDTO(){ //Data Transfer Object = DTO
+        List<Object[]> list = new ArrayList<>(); //train
+        list.add(new Object[]{
+                Contact.builder()
+                        .name("John").lastName("Silver")
+                        .phone("1234567891" ).email("johna_@mail.com")
+                        .address("Rehovot").description("Private").build()
+        });
+        list.add(new Object[]{
+                Contact.builder()
+                        .name("Lera").lastName("Brown")
+                        .phone("0519283746" ).email("mn@mail.com")
+                        .address("Ramat Gan").description("Sport coach").build()
+        });
+        list.add(new Object[]{
+                Contact.builder()
+                        .name("Harry").lastName("Block")
+                        .phone("5198723645" ).email("fg@mail.com")
+                        .address("Rishon").description("Teacher").build()
+        });
+        return list.iterator();  //man in the train "list"
+    }
     @DataProvider
     public Iterator<Object[]> registrationCSV() throws IOException {
         List<Object[]> list = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/reg_dataset.csv")));
+        BufferedReader reader = new BufferedReader(
+                new FileReader(new File("src/test/resources/reg_dataset.csv")));
         String line = reader.readLine();
-        while (line != null) {
+        while(line != null){
             String[] split = line.split(",");
-            list.add(new Object[] {
-                    new User(split[0], split[1])
+            list.add(new Object[]{
+                    User.builder()
+                            .email(split[0])
+                            .password(split[1])
+                            .build()
             });
             line = reader.readLine();
         }
