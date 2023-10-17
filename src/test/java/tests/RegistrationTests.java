@@ -1,5 +1,6 @@
 package tests;
 
+import manager.ProviderData;
 import models.User;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -45,6 +46,16 @@ public class RegistrationTests extends TestBase{
         Assert.assertTrue(app.getHelperUser().isLogged());
         //Assert.assertTrue(wd.findElements(By.xpath("//*[.='Sign Out']")).size() > 0);
         //Assert.assertTrue(wd.findElements(By.tagName("button")).size() > 0);
+    }
+
+    @Test(groups = {"positive"}, dataProvider = "registrationCSV", dataProviderClass = ProviderData.class)
+    public void registrationPositiveTestCSV(User user) {
+        app.getHelperUser().openLoginRegistrationForm();
+        app.getHelperUser().fillLoginRegistrationForm(user);
+        app.getHelperUser().submitRegistration();
+        logger.info("registrationPositiveTest starts with:" + user.getEmail() + " & " + user.getPassword());
+        app.getHelperUser().pause(3000);
+        Assert.assertTrue(app.getHelperUser().isLogged());
     }
 
     //Task 1

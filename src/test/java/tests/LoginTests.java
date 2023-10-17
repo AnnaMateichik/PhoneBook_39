@@ -1,5 +1,6 @@
 package tests;
 
+import manager.ApplicationManager;
 import manager.NGListener;
 import manager.ProviderData;
 import models.Contact;
@@ -21,7 +22,7 @@ public class LoginTests extends TestBase{
 
     @Test(groups = {"positive", "smoke"})
     public void loginPositiveTest() {
-        // open login form
+// open login form
         //wd.findElement(By.xpath("//*[.='LOGIN']")).click();
 
         app.getHelperUser().openLoginRegistrationForm();
@@ -65,6 +66,19 @@ public class LoginTests extends TestBase{
         app.getHelperUser().openLoginRegistrationForm();
         // fill login form
         app.getHelperUser().fillLoginRegistrationForm(user.getEmail(), user.getPassword());
+        // click on button login
+        app.getHelperUser().submitLogin();
+        // assert
+        app.getHelperUser().pause(5000);
+        Assert.assertTrue(app.getHelperUser().isElementPresent(By.xpath("//*[.='Sign Out']")));
+    }
+
+    @Test(groups = {"positive"})
+    public void loginPositiveTestProps() {
+        // open login form
+        app.getHelperUser().openLoginRegistrationForm();
+        // fill login form
+        app.getHelperUser().fillLoginRegistrationForm(app.getEmail(), app.getPassword());
         // click on button login
         app.getHelperUser().submitLogin();
         // assert

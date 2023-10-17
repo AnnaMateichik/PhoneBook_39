@@ -9,6 +9,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 
 public class TestBase {
@@ -35,7 +36,7 @@ public class TestBase {
 //        wd.navigate().to("https://telranedu.web.app/home");
 //        wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 //    }
-    public void setUp() {
+    public void setUp() throws IOException {
         app.init();
     }
     @AfterSuite(alwaysRun = true)
